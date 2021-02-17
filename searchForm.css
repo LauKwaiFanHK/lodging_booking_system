@@ -1,0 +1,96 @@
+.container.non-outline {
+    
+    
+    outline: none !important;
+    
+}
+
+.currency {
+	font-size:50px;
+	line-height:48px !important;
+}
+
+.container.header {
+	line-height:50px;
+	height:50px;
+}
+
+.container.header .container.right .text-right
+{
+	line-height:55px;
+	height:50px;
+}
+
+.round-icon {
+	background: #777;
+	color: #fff;
+	display:inline-block;
+	border-radius: 20px;
+	width:40px;
+	height:40px;
+	line-height:40px;
+	text-align: center;
+	font-size: 25px
+}
+
+.login {
+	height: 50px;
+	line-height:50px;
+	color: #000;
+	background: #0000ff;
+	border-radius: 7px;
+	text-align: center;
+	cursor:pointer;
+	position:relative;
+}
+
+.login .dropdown {
+	position:absolute;
+	top:46px;
+	background: #0000ff;
+	z-index:1000;
+	width:100%
+}
+
+.login .dropdown a{
+	float: none;
+    display: inline-block;
+    width: 100%;
+	color:#000;
+}
+
+.login:hover .dropdown{
+	display: block !important;
+}
+
+.card {
+	float: right;
+	margin-right: 7px;
+	margin-top: 7px;
+	cursor:pointer;
+}
+
+.card:nth-child(3n) {
+	margin-right: 0px
+}
+
+.card-img-top{
+	max-height: 190px;
+}
+
+.row.align-center {
+	margin: 0 65px;
+}
+
+.sights {
+	width: 100%;
+	background: #b6cfff;
+	padding: .75rem 1.25rem
+}
+
+.rating{
+	background: #b6cfff;
+	text-align:center;
+	padding: 7px;
+	border-radius: 4px
+}

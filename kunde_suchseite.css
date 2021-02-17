@@ -1,0 +1,77 @@
+.container {
+  outline: none !important;
+}
+
+.card {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 60px;
+  border-radius: 6px;
+  color: rgba(0, 0, 0, 0.87);
+  background: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  max-width: 100%;
+}
+
+.card-body {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.currency {
+  font-size: 50px;
+  line-height: 48px !important;
+}
+
+.container.header {
+  line-height: 50px;
+  height: 50px;
+}
+
+.container.header .container.right .text-right {
+  line-height: 55px;
+  height: 50px;
+}
+
+.round-icon {
+  background: #777;
+  color: #fff;
+  display: inline-block;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.login {
+  height: 50px;
+  line-height: 50px;
+  color: #000;
+  background: #0000ff;
+  border-radius: 7px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.login .dropdown {
+  position: absolute;
+  top: 46px;
+  background: #0000ff;
+  z-index: 1000;
+  width: 100%;
+}
+
+.login .dropdown a {
+  float: none;
+  display: inline-block;
+  width: 100%;
+  color: #000;
+}
+
+.login:hover .dropdown {
+  display: block !important;
+}
