@@ -1,6 +1,6 @@
 <?php
-include_once 'connect_db.php'; echo "xxx";
-include_once 'anbieter_lib.php'; echo "yyy";
+include_once 'connect_db.php'; 
+include_once 'anbieter_lib.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $AnbieterID = $_POST['AnbieterID'];
@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$Größe = $_POST['Größe'];
 	$Ausstattung = $_POST['Ausstattung'];
     $Preis = $_POST['Preis'];
-    echo "aaa";
     echo $ZimmerID;
     echo $Zimmerkategorie;
     echo $Zimmernummer;

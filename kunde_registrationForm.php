@@ -17,7 +17,7 @@
         <div class="col-6">
             <div id="ui">
                 <h4>Registration Form</h4>
-                <form class="form-group" action="registrationForm1.php" method="post">
+                <form class="form-group" action="insert_kunde.php" method="post">
 
                     <div class="form-container">
                         <label for="name">Vorname</label>
@@ -38,16 +38,10 @@
                     <div class="form-container">
                         <input type="submit" value="Absenden" class="btn btn-primary btn-block mt-4">
                     </div>
-
                 </form>
-
-
             </div>
         </div>
-
         <div class="col"></div>
-
-    </div>
     </div>
 </body>
 

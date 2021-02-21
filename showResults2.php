@@ -9,9 +9,10 @@
    
     <body>
     
-    
 <?php
-
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 $city = strip_tags($_POST['city']);
 $checkin = strip_tags($_POST['checkin']);
 $checkout = strip_tags($_POST['checkout']);
@@ -105,20 +106,54 @@ $PAGE = $_GET['page'] ?: 1
 
 
 <?php
-        
-        
-$connection = mysqli_connect('localhost','liakh','mango','liakh');
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+//include_once 'connect_db.php';
+include_once 'kunde_lib.php';
+
+$KundeID = $_POST['KundeID'];
+$city = $_POST['city'];
+$checkin = $_POST['checkin'];
+$checkout = $_POST['checkout'];
+$numberOfGuests = $_POST['numberOfGuests'];
+$Sehenswurdigkeiten = $_POST['Sehenswurdigkeiten'];
+echo $KundeID;
+echo $city;
+echo $checkin;
+echo $checkout;
+echo $numberOfGuests;
+echo $Sehenswurdigkeiten;
+echo $KundeID;
+
 $query = "SELECT * FROM Unterkunftsanbieter left join Zimmer on Unterkunftsanbieter.AnbieterID = Zimmer.AnbieterID left join Gebäude on Zimmer.GebäudeID = Gebäude.GebäudeID";
+echo "<br><br>query1" . $query;
+$city = "Berlin";
+echo "<br><Br>city: " . $city;
+$numberOfGuests = 2;
+echo "<br><Br>guest: " . $numberOfGuests;
+$checkin = "2020-12-29";
+echo "<br><Br>checkin: " . $checkin;
+$checkout = "2020-12-31";
+echo "<br><Br>checkout: " . $checkout;
+$Sehenswurdigkeiten = true;
+echo "<br><Br>checkbox: " . $Sehenswurdigkeiten;
 
 $filter = [];
+$arCities = [];
+     
+$connection = mysqli_connect('localhost','liakh','mango','liakh');
+$query = "SELECT * FROM Unterkunftsanbieter left join Zimmer on Unterkunftsanbieter.AnbieterID = Zimmer.AnbieterID left join Gebäude on Zimmer.GebäudeID = Gebäude.GebäudeID";
+echo "<br><br> query:" . $query;
+
+$filter = [];
+
 if(!empty($city))
 {
-	$arCities = [];
+	$arCities = []; echo $arCities;
 	$cities = mysqli_query($connection,"select * from Gebäude where Stadt = '{$city}'");
 	if(!empty($cities)) {
 		while($city = mysqli_fetch_assoc($cities))
 		{
-			$arCities[] = $city['GebäudeID'];
+            $arCities[] = $city['GebäudeID'];
 		}
 	}
 	
@@ -128,33 +163,46 @@ if(!empty($city))
 		$filter['city'] = "Gebäude.GebäudeID in ({$arCities})";
 	}
 }
+echo "<br><br> filter[city]:" . $filter['city'];
+
 if(!empty($numberOfGuests))
 {
 	$filter['Kapazität'] = "Zimmer.Kapazität >= {$numberOfGuests}";
 }
+echo "<br><br> filter[Kapazität]:" . $filter['Kapazität'];
+
 
 if(!empty($checkin)) {
-	$buch = mysqli_query($connection,"select * from buchung left join bucht on buchung.BuchungID = bucht.BuchungID where buchung.CheckInDatum >= '{$checkin}'");
+    $sql = "select * from Buchung left join Bucht on Buchung.BuchungID = Bucht.BuchungID where Buchung.CheckInDatum >= '{$checkin}'";
+	$buch = mysqli_query($connection, $sql);
 	if(mysqli_num_rows($buch) > 0) {
 		while($bill = mysqli_fetch_assoc($buch))
 		{
 			$filter['ZimmerID'][] = $bill['ZimmerID'];
 		}
-	}
+    }
+    echo "<br><br>sql: " . $sql;
 }
+echo "<br><br> filter[ZimmerID]:" . $filter['ZimmerID'];
+
+
 if(!empty($checkout)) {
-	$buch = mysqli_query($connection,"select * from buchung left join bucht on buchung.BuchungID = bucht.BuchungID where buchung.CheckOutDatum <= '{$checkout}'");
+    $sql = "select * from Buchung left join Bucht on Buchung.BuchungID = Bucht.BuchungID where Buchung.CheckOutDatum <= '{$checkout}'";
+	$buch = mysqli_query($connection, $sql);
 	if(mysqli_num_rows($buch) > 0) {
 		while($bill = mysqli_fetch_assoc($buch))
 		{
 			$filter['ZimmerID'][] = $bill['ZimmerID'];
 		}
-	}
+    }
+    echo "<br><br>" . $sql;
 }
+echo "<br><br> filter[ZimmerID]:" . $filter['ZimmerID'];
 
 if(!empty($checkout) && !empty($checkin)) {
+    $sql = "select * from Buchung left join Bucht on Buchung.BuchungID = Bucht.BuchungID where Buchung.CheckOutDatum <= '{$checkout}' and Buchung.CheckInDatum >= '{$checkin}'";
 	$filter['ZimmerID'] = [];
-	$buch = mysqli_query($connection,"select * from buchung left join bucht on buchung.BuchungID = bucht.BuchungID where buchung.CheckOutDatum <= '{$checkout}' and buchung.CheckInDatum >= '{$checkin}'");
+	$buch = mysqli_query($connection,$sql);
 	if(mysqli_num_rows($buch) > 0) {
 		while($bill = mysqli_fetch_assoc($buch))
 		{
@@ -164,6 +212,7 @@ if(!empty($checkout) && !empty($checkin)) {
 		unset($filter['ZimmerID']);
 	}
 }
+echo "<br><br> filter[ZimmerID]:" . $filter['ZimmerID'];
 
 if(!empty($filter['ZimmerID']))
 {
@@ -171,19 +220,46 @@ if(!empty($filter['ZimmerID']))
 	$filter['ZimmerID'] = implode(',',$filter['ZimmerID']);
 	$filter['ZimmerID'] = "Zimmer.ZimmerID not in ({$filter['ZimmerID']})";
 }
+echo "<br><br> filter[ZimmerID]:" . $filter['ZimmerID'];
+
 if(!empty($filter)){
 	$filter = implode(' and ',$filter);
 	$query .= ' where '.$filter;
 };
 
+echo "<br><br> query2: " . $query;
+
 $resultALL = mysqli_query($connection, $query);
 $query .= ' LIMIT 6';
+
+echo "<br><br> query3: " . $query;
+
 
 if($PAGE > 1) {
 	$query .= ' OFFSET '.(($PAGE * 6) - 6);
 }
 
-$result = mysqli_query($connection, $query);?>
+echo "<br><br> query4: " . $query;
+
+$result = mysqli_query($connection, $query);
+
+if ($result) {
+    echo "hello";
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_array($result);
+		$Name = $row['Name'];
+		echo $Name;
+		mysqli_free_result($result);
+	} else {
+        echo $query;
+		echo "Row could not be found.";
+	}
+} else {
+	echo " Error: " . $query . "
+" . mysqli_error($connection);
+}
+
+?>
      
 <div class='container mt-5'>
 <div class="row align-center">
@@ -214,6 +290,7 @@ $result = mysqli_query($connection, $query);?>
 <?}?>
 
 </div>
+
 <?
 $pages = ceil(mysqli_num_rows($resultALL)/6);
 
@@ -224,7 +301,7 @@ if($pages <= 1) return;
   <div class="pagination">
   <?if($_GET['page'] > 1){?>
     <div class="page-item">
-	<form action="showResults.php?page=<?=($PAGE - 1)?>"  method="post">
+	<form action="showResults2.php?page=<?=($PAGE - 1)?>"  method="post">
 	<input type="hidden" name="city" value="<?=$city?>">
 	<input type="hidden" name="checkin" value="<?=$checkin?>">
 	<input type="hidden" name="checkout" value="<?=$checkout?>">
@@ -238,7 +315,7 @@ if($pages <= 1) return;
   <?}?>
 	<?for($page = 1; $page <= $pages;$page++){?>
 	<div class="page-item<?=$_GET['page'] == $page ? 'active' : ''?>">
-	<form action="showResults.php?page=<?=$page?>"  method="post">
+	<form action="showResults2.php?page=<?=$page?>"  method="post">
 	<input type="hidden" name="city" value="<?=$city?>">
 	<input type="hidden" name="checkin" value="<?=$checkin?>">
 	<input type="hidden" name="checkout" value="<?=$checkout?>">
@@ -251,7 +328,7 @@ if($pages <= 1) return;
     <?}?>
 	<?if($_GET['page'] < $pages){?>
     <div class="page-item">
-	<form action="showResults.php?page=<?=($PAGE + 1)?>"  method="post">
+	<form action="showResults2.php?page=<?=($PAGE + 1)?>"  method="post">
 	<input type="hidden" name="city" value="<?=$city?>">
 	<input type="hidden" name="checkin" value="<?=$checkin?>">
 	<input type="hidden" name="checkout" value="<?=$checkout?>">

@@ -46,7 +46,7 @@
     <main>
         <div class="col-md-7">
             <h3>Registrierungsformular</h3>
-            <h4>Schritt 3: Fotos Ihrer Unterkunft hochladen</h2>
+            <h4>Schritt 3: <b><i><u>Fotos Ihrer Unterkunft</b></i></u> hochladen</h2>
                 <form action="send_unterkunft_photo.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name='AnbieterID' value='<?php echo $AnbieterID ?>'>
                     <label><b>Erste Foto</b></label>

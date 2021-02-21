@@ -16,38 +16,34 @@
     include_once "connect_db.php";
     include_once "kunde_lib.php";
 
+    $KundeID = $_GET["KundeID"];
     ?>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <!--img id="mylogo" src="untitled.png" width="200" class="center" alt="Logo des Buchungsplattforms"-->
                 <<a class="navbar-brand" href="#">FeelsLikeHome</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Währung auswählen<span class="caret "></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Europa – Euro</a></li>
-                        <li><a href="#">Hong Kong Dollars – HKD</a></li>
-                        <li><a href="#">United Kingdom Pounds – GBP</a></li>
-                        <li><a href="#">United States Dollars – USD</a></li>
+
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Tierpark Hotel <span class="caret"></span></a>
+                <li><a href="kunde_hilfe.php?KundeID=<?php echo $KundeID ?>"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
+                <li class="dropdown" style="width:auto"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><?php echo getKundeVorname($conn, $KundeID) . "" . getKundeNachname($conn, $KundeID) ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Über uns & unsere Angebote</a></li>
-                        <li><a href="#">Auftragshistorie</a></li>
+                        <li><a href="reisende_konto_verwalten.php?KundeID=<?php echo $KundeID ?>">Profil</a></li>
+                        <li><a href="reisende_buchungshistorie.php?KundeID=<?php echo $KundeID ?>">Buchungshistorie</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Ausloggen</a></li>
+                <li><a href="kunde_logout.php"><span class="glyphicon glyphicon-log-in"></span> Ausloggen</a></li>
             </ul>
         </div>
     </nav>
     <main>
         <div class="col-md-4">
-            <?php
-            $KundeID = $_GET["KundeID"];
-            ?>
+
             <form method="POST" action="update_kunde.php">
                 <input type="hidden" name='KundeID' value='<?php echo $_GET["KundeID"] ?>'>
                 <div class="form-group">

@@ -38,7 +38,7 @@
                         <li><a href="#">Europa – Euro</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
+                <li><a href="anbieter_hilfe.php?AnbieterID=<?php echo $AnbieterID ?>"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <span class="glyphicon glyphicon-home"></span>
                         <?php echo getAnbieterName($conn, $AnbieterID) ?> <span class="caret"></span></a>

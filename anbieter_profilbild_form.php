@@ -27,26 +27,24 @@
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Währung auswählen<span class="caret "></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Europa – Euro</a></li>
-                        <li><a href="#">Hong Kong Dollars – HKD</a></li>
-                        <li><a href="#">United Kingdom Pounds – GBP</a></li>
-                        <li><a href="#">United States Dollars – USD</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Tierpark Hotel <span class="caret"></span></a>
+                <li><a href="anbieter_hilfe.php?AnbieterID=<?php echo $AnbieterID ?>"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
+                <li class="dropdown" style="width:auto"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><?php echo getAnbieterName($conn, $AnbieterID) ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Über uns & unsere Angebote</a></li>
-                        <li><a href="#">Auftragshistorie</a></li>
+                        <li><a href="reisende_konto_verwalten.php?KundeID=<?php echo $AnbieterID ?>">Über uns & unsere
+                                Angebote</a></li>
+                        <li><a href="reisende_buchungshistorie.php?KundeID=<?php echo $AnbieterID ?>">Auftragshistorie</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Ausloggen</a></li>
+                <li><a href="kunde_logout.php"><span class="glyphicon glyphicon-log-in"></span> Ausloggen</a></li>
             </ul>
         </div>
     </nav>
     <main>
         <div class="col-md-7">
             <h3>Registrierungsformular</h3>
-            <h4>Schritt 2: Profilfoto Ihrer Unterkunft hochladen</h2>
+            <h4>Schritt 2: <b><i><u>Profilfoto</u></i></b> Ihrer Unterkunft hochladen</h2>
                 <form action="send_anbieter_photo.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name='AnbieterID' value='<?php echo $AnbieterID ?>'>
                     <input type="file" name="anbieter_photo">

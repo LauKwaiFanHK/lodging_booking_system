@@ -38,14 +38,14 @@
                         <li><a href="#">Europa – Euro</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
+                <li><a href="anbieter_hilfe.php?AnbieterID=<?php echo $AnbieterID ?>"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <span class="glyphicon glyphicon-home"></span>
                         <?php echo getAnbieterName($conn, $AnbieterID) ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="anbieter_über_uns.php?AnbieterID=<?php echo $AnbieterID ?>">Über uns & unsere
+                        <li><a href="anbieter_über_uns.php?AnbieterID=<?php echo $AnbieterID ?>&GebäudeID=<?php echo $GebäudeID ?>">Über uns & unsere
                                 Angebote</a></li>
-                        <li><a href="anbieter_auftragshistorie.php?AnbieterID=<?php echo $AnbieterID ?>">Auftragshistorie</a>
+                        <li><a href="anbieter_auftragshistorie.php?AnbieterID=<?php echo $AnbieterID ?>&GebäudeID=<?php echo $GebäudeID ?>">Auftragshistorie</a>
                         </li>
                     </ul>
                 </li>
@@ -70,6 +70,7 @@
                         <br>
                         <form action="update_anbieter_foto.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name='AnbieterID' value='<?php echo $AnbieterID ?>'>
+                            <input type="hidden" name='GebäudeID' value='<?php echo $GebäudeID ?>'>
                             <div class="text-center">
                                 <input type="file" type="hidden" name="anbieter_photo">
                                 <div>
@@ -97,16 +98,15 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form action="update_anbieter_nachricht.php" method="post">
-                        <input type="hidden" name='AnbieterID' value='<?php echo $AnbieterID ?>'>
+                    <form method="post" action="insert_gebaeude_adresse.php">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">
                                 <span class="glyphicon glyphicon-send"></span>&nbsp;
                                 Eine Nachricht an der Reisende:</label>
                             <textarea class="form-control" name="Nachricht" rows="3" placeholder="'editieren' zu klicken, um eine Nachricht an Ihrer Gäste zu schreiben!"><?php echo getAnbieterNachricht($conn, $AnbieterID) ?></textarea>
-                            <div class="text-right">
+                            <div class="text-left">
                                 <div class="btn-group">
-                                    <button type="submit" class="btn btn-secondary"><a href="anbieter_nachricht_form.php?AnbieterID=<?php echo $AnbieterID ?>">
+                                    <button type="" class="btn btn-secondary"><a href="anbieter_nachricht_form.php?AnbieterID=<?php echo $AnbieterID ?>&GebäudeID=<?php echo $GebäudeID ?>">
                                             <span class="glyphicon glyphicon-pencil"></span>&nbsp;editieren</a></button>
                                 </div>
                             </div>
@@ -132,20 +132,63 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-1"></div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <br>
+                <div class="col-md-4"></div>
+                <div class="col-md-7">
+                    <div class="card">
                         <form method="POST" action="insert_gebaeude_adresse.php">
-                            <label><span class="glyphicon glyphicon-home"></span>&nbsp;Adresse Ihrer
-                                Unterkunft:</label>
-                            <div class="col"></div>
-                            <div class="col-md-12">
-                                <div class="text-left">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-secondary"><a href="anbieter_gebaeude_form.php?AnbieterID=<?php echo $AnbieterID ?>&GebäudeID=<?php echo $GebäudeID ?>">
-                                                <span class="glyphicon glyphicon-pencil"></span>&nbsp;zum Formular</a></button>
+                        <input type="hidden" name='AnbieterID' value='<?php echo $AnbieterID ?>'>
+                            <label for="exampleFormControlTextarea1">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                                Adresse Ihrer Unterkunft:</label>
+                            <div class="form-row">
+                                <div class="col-md-2 mb-2">
+                                    <label for="validationCustom03">Hausnr.</label>
+                                    <input type="text" class="form-control" name="hausnummer" placeholder="Hausnummer" required value="<?php echo getAnbieterHausnr($conn, $GebäudeID) ?>" />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom04">Straße</label>
+                                    <input type="text" class="form-control" name="Straße" placeholder="Straße" required value="<?php echo getAnbieterStrasse($conn, $GebäudeID) ?>" />
+                                </div>
+                                <div class="col-md-2 mb-4">
+                                    <label for="validationCustom05">PLZ</label>
+                                    <input type="number" class="form-control" name="PLZ" placeholder="PLZ" required value="<?php echo getAnbieterPLZ($conn, $GebäudeID) ?>" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationCustom05">Stadt</label>
+                                    <input type="text" class="form-control" name="Stadt" placeholder="Stadt" required value="<?php echo getAnbieterStadt($conn, $GebäudeID) ?>" />
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationCustom03">Bundesland</label>
+                                    <input type="text" class="form-control" name="Bundesland" placeholder="Bundesland" required value="<?php echo getAnbieterBundesland($conn, $GebäudeID) ?>" />
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationCustom04">Land</label>
+                                    <input type="text" class="form-control" name="Land" placeholder="Land" required value="<?php echo getAnbieterLand($conn, $GebäudeID) ?>" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <br>
+                                    <label for="validationCustom03">Telefonnummer</label>
+                                    <input type="text" class="form-control" name="Telefonnummer" placeholder="Telefonnummer" required value="<?php echo getAnbieterTelefonnr($conn, $GebäudeID) ?>" />
+                                </div>
+
+                                <div class="col"></div>
+                                <div class="col-md-12">
+                                    <br>
+                                    <div class="text-left">
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-secondary">
+                                                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;einfügen</button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-secondary"><a href="anbieter_gebaeude_form.php?AnbieterID=<?php echo $AnbieterID ?>&GebäudeID=<?php echo $GebäudeID ?>">
+                                                    <span class="glyphicon glyphicon-pencil"></span>&nbsp;editieren</a></button>
+                                        </div>
                                     </div>
+                                    <br>
                                 </div>
                             </div>
                         </form>
@@ -154,7 +197,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-1"></div>
+            <div class="col-md-2"></div>
+            <div class="card" style="width:88rem"> 
             <div class="col-md-8">
                 <br>
                 <label><span class="glyphicon glyphicon-bed"></span>&nbsp;Zimmerangaben Ihrer

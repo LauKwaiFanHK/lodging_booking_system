@@ -21,19 +21,16 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <!--img id="mylogo" src="untitled.png" width="200" class="center" alt="Logo des Buchungsplattforms"-->
-                <<a class="navbar-brand" href="#">FeelsLikeHome</a>
+                <a class="navbar-brand" href="#">FeelsLikeHome</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Währung auswählen<span
                             class="caret "></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Europa – Euro</a></li>
-                        <li><a href="#">Hong Kong Dollars – HKD</a></li>
-                        <li><a href="#">United Kingdom Pounds – GBP</a></li>
-                        <li><a href="#">United States Dollars – USD</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
+                <li><a href="anbieter_hilfe.php?AnbieterID=<?php echo $AnbieterID ?>"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Tierpark Hotel <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -49,9 +46,11 @@
         <div class="col-md-7">
             <?php
             $AnbieterID = $_GET["AnbieterID"];
+            $GebäudeID = $_GET["GebäudeID"];
             ?>
-            <form action="update_anbieter_nachricht.php" method="post">
+            <form action="update_anbieter_nachricht.php?AnbieterID=<?php echo $AnbieterID ?>&GebäudeID=<?php echo $GebäudeID ?>" method="post">
                 <input type="hidden" name='AnbieterID' value='<?php echo $AnbieterID ?>'>
+                <input type="hidden" name='GebäudeID' value='<?php echo $GebäudeID ?>'>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Schreiben Sie eine Nachricht an der
                         Reisende:</label>

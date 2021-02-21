@@ -28,13 +28,10 @@
                             class="caret "></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Europa – Euro</a></li>
-                        <li><a href="#">Hong Kong Dollars – HKD</a></li>
-                        <li><a href="#">United Kingdom Pounds – GBP</a></li>
-                        <li><a href="#">United States Dollars – USD</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Tierpark Hotel <span
+                <li><a href="anbieter_hilfe.php?AnbieterID=<?php echo $AnbieterID ?>"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-home"></span> Tierpark Hotel <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Über uns & unsere Angebote</a></li>
@@ -48,12 +45,12 @@
     <main>
         <div class="col-md-7">
             <?php
-            $GebäudeID = $_GET["GebäudeID"];
+            $GebäudeID = $_GET["GebäudeID"]; 
             $AnbieterID = $_GET["AnbieterID"];
             ?>
             <form method="POST" action="update_anbieter_gebaeude.php">
                 <label for="exampleFormControlTextarea1">Listen Sie die Details Ihrer Zimmerangebote
-                    auf.</label>
+                    auf. </label>
                 <input type="hidden" name='GebäudeID' value='<?php echo $GebäudeID ?>'>
                 <input type="hidden" name='AnbieterID' value='<?php echo $AnbieterID ?>'>
                 <div class="form-row">

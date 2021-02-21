@@ -76,10 +76,10 @@ function getGebauedeIDAdresse($conn, $GebäudeID)
             $PLZ = $row['PLZ'];
             $Bundesland = $row['Bundesland'];
             $Land = $row['Land'];
-            $Telefonnummer = $row['Telefonnummer'];
-            $address = $Hausnr . ', ' . $Straße . ', ' . "<br>" . $PLZ . ', ' . $Bundesland
-            . "<br>" . $Land;
+            $address = $Hausnr . ', ' . $Straße . ', ' . $PLZ . ', ' . "<br>" . $Bundesland . ', ' .
+             $Land;
             mysqli_free_result($result);
+            return $address;
         } else {
             echo $sql;
             echo "Row could not be found.";
@@ -91,7 +91,7 @@ function getGebauedeIDAdresse($conn, $GebäudeID)
         echo " Error: " . $sql . "
 " . mysqli_error($conn);
     }
-    return $address;
+    
 }
 
 function getAnbieterHausnr($conn, $GebäudeID)
@@ -106,6 +106,7 @@ function getAnbieterHausnr($conn, $GebäudeID)
             $row = mysqli_fetch_array($result);
             $Hausnr = $row['Hausnummer'];
             mysqli_free_result($result); 
+            return $Hausnr;
         } else {
             echo $sql;
             echo "Row could not be found.";
@@ -117,7 +118,7 @@ function getAnbieterHausnr($conn, $GebäudeID)
         echo " Error: " . $sql . "
 " . mysqli_error($conn);
     }
-    return $Hausnr;
+    
 }
 
 function getAnbieterStrasse($conn, $GebäudeID)
@@ -132,7 +133,7 @@ function getAnbieterStrasse($conn, $GebäudeID)
             $row = mysqli_fetch_array($result);
             $Straße = $row['Straße'];
             mysqli_free_result($result);
-            echo ", ";
+            return $Straße;
         } else {
             echo $sql;
             echo "Row could not be found.";
@@ -146,7 +147,7 @@ function getAnbieterStrasse($conn, $GebäudeID)
         echo " Error: " . $sql . "
 " . mysqli_error($conn);
     }
-    return $Straße;
+    
 }
 
 function getAnbieterPLZ($conn, $GebäudeID)
@@ -161,7 +162,7 @@ function getAnbieterPLZ($conn, $GebäudeID)
             $row = mysqli_fetch_array($result);
             $PLZ = $row['PLZ'];
             mysqli_free_result($result);
-            echo ", ";
+            return $PLZ;
         } else {
             echo $sql;
             echo "Row could not be found.";
@@ -174,7 +175,7 @@ function getAnbieterPLZ($conn, $GebäudeID)
         echo " Error: " . $sql . "
 " . mysqli_error($conn);
     }
-    return $PLZ;
+    
 }
 
 function getAnbieterTelefonnr($conn, $GebäudeID)
@@ -189,9 +190,10 @@ function getAnbieterTelefonnr($conn, $GebäudeID)
             $row = mysqli_fetch_array($result);
             $Telefonnummer = $row['Telefonnummer'];
             mysqli_free_result($result);
+            return $Telefonnummer;
         } else {
             echo $sql;
-            echo "Row could not be found.";
+            echo "";
         }
     } 
     if (!$result) {
@@ -201,7 +203,7 @@ function getAnbieterTelefonnr($conn, $GebäudeID)
         echo " Error: " . $sql . "
 " . mysqli_error($conn);
     }
-    return $Telefonnummer;
+    
 }
 
 function getAnbieterStadt($conn, $GebäudeID)
@@ -216,6 +218,7 @@ function getAnbieterStadt($conn, $GebäudeID)
             $row = mysqli_fetch_array($result);
             $Stadt = $row['Stadt'];
             mysqli_free_result($result);
+            return $Stadt;
         } else {
             echo $sql;
             echo "Row could not be found.";
@@ -228,7 +231,7 @@ function getAnbieterStadt($conn, $GebäudeID)
         echo " Error: " . $sql . "
 " . mysqli_error($conn);
     }
-    return $Stadt;
+    
 }
 
 function getAnbieterBundesland($conn, $GebäudeID)
@@ -243,6 +246,7 @@ function getAnbieterBundesland($conn, $GebäudeID)
             $row = mysqli_fetch_array($result);
             $Bundesland = $row['Bundesland'];
             mysqli_free_result($result);
+            return $Bundesland;
         } else {
             echo $sql;
             echo "Row could not be found.";
@@ -255,7 +259,7 @@ function getAnbieterBundesland($conn, $GebäudeID)
         echo " Error: " . $sql . "
 " . mysqli_error($conn);
     }
-    return $Bundesland;
+    
 }
 
 function getAnbieterLand($conn, $GebäudeID)
@@ -270,6 +274,7 @@ function getAnbieterLand($conn, $GebäudeID)
             $row = mysqli_fetch_array($result);
             $Land = $row['Land'];
             mysqli_free_result($result);
+            return $Land;
         } else {
             echo $sql;
             echo "Row could not be found.";
@@ -282,7 +287,7 @@ function getAnbieterLand($conn, $GebäudeID)
         echo " Error: " . $sql . "
 " . mysqli_error($conn);
     }
-    return $Land;
+    
 }
 
 function updateAnbieterGebaeude($conn, $GebäudeID, $hausnummer, $Straße, $plz, $Stadt, $Bundesland, $Land, $Telefonnummer)
@@ -363,7 +368,7 @@ function getAnbieterZimmer($conn, $AnbieterID)
             while ($row = mysqli_fetch_array($result)) {
                 $ZimmerID = $row['ZimmerID'];
                 echo "<tr>";
-                echo "<td align='center'>" . $row['Zimmerkategorie'] . "</td>";
+                echo "<td getAnbieterZimmerForReisende>" . $row['Zimmerkategorie'] . "</td>";
                 echo "<td align='center'>" . $row['Ausstattung'] . "</td>";
                 echo "<td align='center'>" . $row['Größe'] . "</td>";
                 echo "<td align='center'>" . $row['Kapazität'] . "</td>";
@@ -377,8 +382,7 @@ function getAnbieterZimmer($conn, $AnbieterID)
             echo "</table>";
             mysqli_free_result($result);
         } else {
-            echo $sql;
-            echo "No records matching your query were found.";
+            echo "Keine verfügbare Information. Fügen Sie Ihres erste Zimmerkategorie ein!";
         }
     } else {
         echo " Error: " . $sql . "
@@ -684,6 +688,28 @@ function getGebäudeID($conn, $ZimmerID)
     return $GebäudeID;
 }
 
+function getGebäudeIDHomepage($conn, $AnbieterID)
+{
+    $sql = "SELECT GebäudeID from Zimmer
+                WHERE AnbieterID = $AnbieterID";
+
+    if ($result = mysqli_query($conn, $sql)) {
+
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_array($result);
+            $GebäudeID = $row['GebäudeID'];
+            mysqli_free_result($result);
+        } else {
+            echo $sql;
+            echo "Row could not be found.";
+        }
+    } else {
+        echo " Error: " . $sql . "
+" . mysqli_error($conn);
+    }
+    return $GebäudeID;
+}
+
 function getZimmerData($conn, $ZimmerID)
 {
     $sql = "SELECT Zimmerkategorie, Zimmernummer, Etage, Kapazität, Größe, Ausstattung, Preis from Zimmer
@@ -732,7 +758,7 @@ function getAllZimmerkategorie($conn, $AnbieterID)
     }
 }
 
-function getAnbieterZimmerForReisende($conn, $AnbieterID)
+function getAnbieterZimmerForReisende($conn, $AnbieterID, $KundeID, $checkin, $checkout, $guest)
 {
     $sql = "SELECT ZimmerID, Zimmerkategorie,Ausstattung,Größe,Kapazität,Etage,Zimmernummer,Preis from Zimmer
             WHERE AnbieterID = $AnbieterID";
@@ -749,9 +775,9 @@ function getAnbieterZimmerForReisende($conn, $AnbieterID)
                 echo "<td align='center'>" . $row['Kapazität'] . "</td>";
                 echo "<td align='center'>" . $row['Etage'] . "</td>";
                 echo "<td align='center'>" . $row['Zimmernummer'] . "</td>";
-                echo "<td align='center'>" . $row['Preis'] . "</td>";
-                echo "<td align='center'><a href = 'reisende_reservieren_form.php?ZimmerID=$ZimmerID' class='reservieren' title='reservieren' data-toggle='tooltip'><button>reservieren</button></td>";
-
+                echo "<td align='center'>" . $row['Preis'] . "€" . "</td>";
+                echo "<td align='center'><button>
+                <a href ='kunde_reservieren_form.php?KundeID=" . $KundeID . "&ZimmerID=" . $ZimmerID . "&AnbieterID=" . $AnbieterID . "&checkin=" . $checkin . "&checkout=" . $checkout . "&guest=" . $guest . "' data-toggle='tooltip'>reservieren</a></button></td>";
                 echo "</tr>";
             }
             echo "</table>";
@@ -817,8 +843,7 @@ function getAllAuftragData($conn, $AnbieterID)
             echo "</table>";
             mysqli_free_result($result);
         } else {
-            echo $sql;
-            echo "No records matching your query were found.";
+            echo "Sie haben noch keinen Auftrag bekommen!";
         }
     } else {
         echo " Error: " . $sql . "

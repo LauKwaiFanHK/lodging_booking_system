@@ -1,0 +1,49 @@
+.container-fluid {
+    width: 960px !important;
+        margin-top: 20px;
+  }
+  
+  main h5 {
+    margin-top: 0.5rem;
+  }
+  
+  .form-inline .form-group {
+    margin-right: auto;
+  }
+  
+  .submit {
+    background-color: #e8e5e5;
+    border-color: #faebcc;
+    border-radius: 10px;
+    margin-top: 40px;
+  }
+  
+  .form-control {
+    background-color: #e8e5e5;
+  }
+  
+  .dropdown {
+    margin-bottom: 1rem;
+    margin-left: 5px;
+  }
+  
+  .btn-primary {
+    color: black;
+    background-color: #ffbc26;
+    border-color: #ffbc26;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .btn-primary:hover {
+    color: black;
+    background-color: #ffbc26;
+    border-color: #ffbc26;
+  }
+  
+  .information p{
+      margin-bottom: 0rem;
+  }
+  main ul li {
+  line-height: 1.3;
+  }

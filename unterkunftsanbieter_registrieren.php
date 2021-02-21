@@ -28,9 +28,6 @@
                             class="caret "></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Europa – Euro</a></li>
-                        <li><a href="#">Hong Kong Dollars – HKD</a></li>
-                        <li><a href="#">United Kingdom Pounds – GBP</a></li>
-                        <li><a href="#">United States Dollars – USD</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>

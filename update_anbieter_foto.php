@@ -2,6 +2,7 @@
 include_once "connect_db.php";
 include_once "anbieter_lib.php";
 $AnbieterID = $_POST['AnbieterID'];
+$GebäudeID = $_POST['GebäudeID'];
 
 $target_dir = "image_anbieter/";
 $target_file = $target_dir . basename($_FILES["anbieter_photo"]["name"]);
@@ -38,7 +39,7 @@ if (isset($_POST["submit"])) {
     } else {
         echo "<script type='text/javascript'>";
         echo "alert('Tut mir Leid! Die Datei ist kein Bild.');
-        window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID'";
+        window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID&GebäudeID=$GebäudeID";
         echo "</script>";
         $uploadOk = 0;
     }
@@ -57,7 +58,7 @@ if (isset($_POST["submit"])) {
 if ($_FILES["fileToUpload"]["size"] > 500000) {
     echo "<script type='text/javascript'>";
     echo "alert('Tut mir Leid! Die Datei ist zu groß.');
-    window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID'";
+    window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID&GebäudeID=$GebäudeID";
     echo "</script>";
     $uploadOk = 0;
 }
@@ -70,7 +71,7 @@ if (
 ) {
     echo "<script type='text/javascript'>";
     echo "alert('Tut mir Leid! Nur JPG, JPEG, PNG & GIF Datei sind erlaubt.');
-    window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID'";
+    window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID&GebäudeID=$GebäudeID";
     echo "</script>";
     $uploadOk = 0;
 }
@@ -78,7 +79,7 @@ if (
 if ($uploadOk == 0) {
     echo "<script type='text/javascript'>";
     echo "alert('Tut mir Leid! Ihre Foto wurde nicht hochgeladen.');
-    window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID'";
+    window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID&GebäudeID=$GebäudeID";
     echo "</script>";
     // if everything is ok, try to upload file
 } else {
@@ -87,7 +88,7 @@ if ($uploadOk == 0) {
         updatePhoto($conn, $target_file, $AnbieterID);
         echo "<script type='text/javascript'>";
         echo "alert('Das Foto wurde hochgeladen!');
-    window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID'";
+    window.location = 'http://172.16.32.201/~lauk/Buchungsplattform/anbieter_über_uns.php?AnbieterID=$AnbieterID&GebäudeID=$GebäudeID'";
         echo "</script>";
     } else {
         echo 'upload to DB failed';

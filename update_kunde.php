@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$Email = $_POST['Email'];
 
 	updateKunde($conn, $KundeID, $Vorname, $Nachname, $Passwort, $Email);
-	header('Location: anbieter_über_uns.php');
+	header('Location: reisende_konto_verwalten.php?KundeID=' . $KundeID);
 } else {
-    echo "aaa";
+    echo "Error: data cannot be edited.";
 }
 
 
