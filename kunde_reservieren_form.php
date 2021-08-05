@@ -32,7 +32,7 @@
     $timestamp1 = strtotime($checkin);
     $timestamp2 = strtotime($checkout);
     $days = ($timestamp2 - $timestamp1) / (24 * 60 * 60);
-    $city = getAnbieterStadt($conn, $GebäudeID); 
+    $city = getAnbieterStadt($conn, $GebäudeID);
 
     ?>
     <nav class="navbar navbar-inverse">
@@ -50,7 +50,7 @@
                 <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>Hilfe</a></li>
                 <li class="dropdown" style="width:auto"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><?php echo getKundeVorname($conn, $KundeID) . " " . getKundeNachname($conn, $KundeID) ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                    <li><a href="reisende_konto_verwalten.php?KundeID=<?php echo $KundeID ?>">Profil</a></li>
+                        <li><a href="reisende_konto_verwalten.php?KundeID=<?php echo $KundeID ?>">Profil</a></li>
                         <li><a href="reisende_buchungshistorie.php?KundeID=<?php echo $KundeID ?>">Buchungshistorie</a></li>
                     </ul>
                 </li>
@@ -61,6 +61,14 @@
     </nav>
 
     <h1 class="text-center">Buchungsformular</h1>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="text-left">
+            <div class="btn-group">
+                <button type="button" class="btn btn-light" onclick="history.back()"><span class="glyphicon glyphicon-arrow-left"></span> Zurück</a></button>
+            </div>
+        </div>
+    </div>
 
     <div class="container-fluid">
         <section class="col-md-12">
@@ -129,19 +137,19 @@
                                         <p>Wählen Sie eine Zahlungsmethode aus.</p>
                                         <input class="form-check-input" type="checkbox" name="checkbox" value="Bar">
                                         <label class=" form-check-label" for="gridCheck1">
-                                        vor Ort mit Bar Geld
+                                            vor Ort mit Bar Geld
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="checkbox" value="Banküberweisung">
                                         <label class=" form-check-label" for="gridCheck2">
-                                        Banküberweisung
+                                            Banküberweisung
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="checkbox" value="Kreditkarte">
                                         <label class=" form-check-label" for="gridCheck3">
-                                        Kreditkarte
+                                            Kreditkarte
                                         </label>
                                     </div>
                                 </div>

@@ -7,5 +7,5 @@ $conn=mysqli_connect($servername,$username,$password,$dbname);
 if(!$conn){
    die('Could not Connect My Sql:');
 }
-echo 'Connect DB sucessfully'
+//echo 'Connect DB sucessfully'
 ?>

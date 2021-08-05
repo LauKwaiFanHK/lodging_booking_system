@@ -81,7 +81,7 @@ if (!empty($checkout) && !empty($checkin)) {
 if (!empty($filter['ZimmerID'])) {
     $filter['ZimmerID'] = array_unique($filter['ZimmerID']);
     $filter['ZimmerID'] = implode(',', $filter['ZimmerID']);
-    $filter['ZimmerID'] = "room.ZimmerID not in ({$filter['ZimmerID']})";
+    $filter['ZimmerID'] = "Zimmer.ZimmerID not in ({$filter['ZimmerID']})";
 }
 
 if (!empty($filter)) {
@@ -92,7 +92,7 @@ if (!empty($filter)) {
 $resultALL = mysqli_query($connection, $query);
 $query .= ' LIMIT 6';
 
-echo "<br><br> query4: " . $query;
+//echo "<br><br> query4: " . $query;
 
 if ($PAGE > 1) {
     $query .= ' OFFSET ' . (($PAGE * 6) - 6);

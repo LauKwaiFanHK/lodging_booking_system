@@ -49,7 +49,7 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Ausloggen</a></li>
+                <li><a href="anbieter_logout.php"><span class="glyphicon glyphicon-log-in"></span> Ausloggen</a></li>
             </ul>
         </div>
     </nav>

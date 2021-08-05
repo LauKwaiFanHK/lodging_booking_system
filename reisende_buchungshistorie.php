@@ -49,7 +49,7 @@
             <div class="col-md-1"></div>
             <div class="text-left">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-light" onclick="history.back()"><span class="glyphicon glyphicon-arrow-left"></span> Zurück zur Suchseite</a></button>
+                    <button type="button" class="btn btn-light"><a href="kunde_suchseite.php?KundeID=<?php echo $KundeID ?>"><span class="glyphicon glyphicon-arrow-left"></span> Zurück zur Suchseite</a></button>
                 </div>
             </div>
         </div>
