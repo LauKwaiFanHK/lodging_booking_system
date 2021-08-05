@@ -1,6 +1,7 @@
 CONTENTS OF THIS FILE
 ---------------------
 * Introduction
+* Documentation
 * Requirements
 * Authors
 
@@ -30,6 +31,10 @@ A web based lodging booking system.
 		+ check order history
 		+ check customers' rating of the accommodation
 * mySQL Database is used
+
+Documentation
+-------------
+* A documentation ("Buchungsplattform für Unterkünfte Dokumentation.pdf") provides full details about the booking system and the development of this project
 
 Requirement
 -----------
