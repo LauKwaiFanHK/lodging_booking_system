@@ -1,9 +1,14 @@
 CONTENTS OF THIS FILE
 ---------------------
+* Reminder
 * Introduction
 * Documentation
 * Requirements
 * Authors
+
+Reminder
+--------
+__For copyright protection of images and photos used to develop this project, all images and photos were removed from this repository.__
 
 Introduction
 ------------
